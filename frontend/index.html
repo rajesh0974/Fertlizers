@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Based Fertilizer Identification & Smart Agricultural Advisory</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="AI-Based Fertilizer Identification & Smart Agricultural Advisory System • Chemical & Biofertilizers • NPK & Microbial Analysis • Farmer Advisory">
+    <meta name="theme-color" content="#1b5e20">
+    <meta name="fertilizer-api-url" content="">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fertilizer AI">
+    <meta name="msapplication-TileColor" content="#1b5e20">
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-icon-180x180.png">
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        :root {
+            --primary: #155724;
+            --primary-dark: #0f3d19;
+            --primary-light: #28a745;
+            --secondary: #2e7d32;
+            --accent: #ffb300;
+            --accent-bio: #059669;
+            --accent-chem: #0284c7;
+            --bg-gradient: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2f1 100%);
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --card-border: rgba(46, 125, 50, 0.15);
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px rgba(21, 87, 36, 0.1);
+            --shadow-lg: 0 20px 40px rgba(21, 87, 36, 0.16);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px 16px 50px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 16px 10px 0;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(40, 167, 69, 0.12);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border: 1px solid rgba(40, 167, 69, 0.25);
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #14532d 0%, #15803d 50%, #22c55e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            max-width: 780px;
+            margin: 0 auto 20px;
+        }
+
+        /* Top Module Navigation Bar */
+        .module-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .nav-btn {
+            padding: 12px 22px;
+            border-radius: 14px;
+            border: 1.5px solid rgba(46, 125, 50, 0.2);
+            background: white;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(21, 87, 36, 0.3);
+        }
+
+        /* Views */
+        .tab-view {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-view.active {
+            display: block;
+        }
+
+        /* Layout Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 1080px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(46, 125, 50, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .card-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Capture & Upload Area */
+        .capture-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn-capture-mode {
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(46, 125, 50, 0.25);
+            background: white;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .btn-capture-mode:hover {
+            background: rgba(40, 167, 69, 0.08);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .upload-dropzone {
+            border: 2px dashed rgba(46, 125, 50, 0.4);
+            border-radius: var(--radius-md);
+            padding: 38px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.75);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .upload-dropzone:hover, .upload-dropzone.dragover {
+            border-color: var(--primary);
+            background: rgba(240, 253, 244, 0.95);
+            transform: scale(1.01);
+        }
+
+        .dropzone-icon {
+            font-size: 3.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .upload-dropzone:hover .dropzone-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .dropzone-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .dropzone-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        #fileInput, #nativeCameraInput {
+            display: none;
+        }
+
+        /* Preview Container */
+        .preview-container {
+            display: none;
+            margin-top: 18px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            background: #000;
+            border: 2px solid var(--primary);
+        }
+
+        .preview-container.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 380px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .preview-overlay-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Live Camera Modal Viewfinder */
+        .camera-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .camera-modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .camera-box {
+            background: #0f172a;
+            border-radius: 20px;
+            max-width: 640px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .camera-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .camera-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-icon-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .btn-icon-close:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .video-viewport {
+            position: relative;
+            background: #000;
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #cameraVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .camera-guide-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 70%;
+            border: 2px dashed rgba(255, 255, 255, 0.85);
+            border-radius: 16px;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px;
+        }
+
+        .guide-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            text-align: center;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        .camera-controls {
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-cam-action {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-cam-action:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .btn-cam-snap {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: #22c55e;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-cam-snap:hover {
+            transform: scale(1.08);
+            background: #16a34a;
+        }
+
+        /* Action Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 15px 24px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(21, 87, 36, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(21, 87, 36, 0.4);
+            filter: brightness(1.06);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            padding: 15px 20px;
+            background: white;
+            color: var(--text-muted);
+            border: 1.5px solid #cbd5e1;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+
+        /* Status & Diagnostic Alert */
+        .alert-bar {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: none;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .alert-bar.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Results Panel */
+        .results-panel {
+            display: none;
+            margin-top: 28px;
+            animation: slideUp 0.5s ease;
+        }
+
+        .results-panel.show {
+            display: block;
+        }
+
+        .result-badge-header {
+            background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+            color: white;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .type-tags-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge-type {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-chemical {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-bio {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-subtype {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .result-title-area h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.95rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .confidence-pill {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 8px 18px;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: right;
+        }
+
+        .confidence-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.85;
+            display: block;
+        }
+
+        /* Analysis Box: NPK or Bio Analysis */
+        .analysis-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .analysis-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .npk-meters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .npk-meters {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .npk-meter-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+
+        .npk-meter-box.nitrogen { border-top: 4px solid #0284c7; }
+        .npk-meter-box.phosphorus { border-top: 4px solid #e11d48; }
+        .npk-meter-box.potassium { border-top: 4px solid #ca8a04; }
+
+        .npk-element {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .element-symbol {
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .element-percent {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .progress-bar-bg {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 1s ease;
+        }
+
+        .nitrogen .progress-bar-fill { background: #0284c7; }
+        .phosphorus .progress-bar-fill { background: #e11d48; }
+        .potassium .progress-bar-fill { background: #ca8a04; }
+
+        .composition-box {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Advisory Grid */
+        .advisory-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .advisory-box {
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .advisory-box:hover {
+            border-color: rgba(46, 125, 50, 0.4);
+            box-shadow: var(--shadow-md);
+        }
+
+        .advisory-box-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .advisory-box-content {
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .advisory-box ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .advisory-box li {
+            margin-bottom: 6px;
+        }
+
+        .precautions-box {
+            background: #fffbeb;
+            border-left: 5px solid #f59e0b;
+        }
+
+        .precautions-box .advisory-box-header {
+            color: #b45309;
+        }
+
+        .storage-box {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+        }
+
+        .storage-box .advisory-box-header {
+            color: #166534;
+        }
+
+        /* Chat Card */
+        .chat-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 540px;
+        }
+
+        .chat-body {
+            flex: 1;
+            min-height: 380px;
+            max-height: 480px;
+            overflow-y: auto;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .chat-empty {
+            margin: auto;
+            text-align: center;
+            color: var(--text-muted);
+            padding: 20px;
+        }
+
+        .chat-empty i {
+            font-size: 2.8rem;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        .chat-msg {
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            max-width: 85%;
+            word-break: break-word;
+            line-height: 1.55;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chat-msg.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-msg.bot {
+            background: white;
+            color: var(--text-dark);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chat-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .chip {
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 9999px;
+            padding: 6px 12px;
+            font-size: 0.78rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chip:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #cbd5e1;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+        }
+
+        .btn-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 48px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .btn-send:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Explorer Grid for Chemical & Bio Catalog */
+        .explorer-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .sub-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .sub-filter-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sub-filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .catalog-card {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .catalog-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+
+        .catalog-badge-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .catalog-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .catalog-desc {
+            font-size: 0.88rem;
+            color: #475569;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .btn-inspect {
+            background: #f1f5f9;
+            border: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-inspect:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Scan History View */
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .history-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .history-thumb-box {
+            height: 160px;
+            background: #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .history-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .history-body {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .history-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        /* Animations & Utilities */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media print {
+            body { background: white; color: black; padding: 0; }
+            .module-nav, .capture-options, .btn-group, .chat-card { display: none !important; }
+            .main-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header data-aos="fade-down">
+        <div class="badge-pill">
+            <i class="fas fa-shield-alt"></i> Krishi-AI Vision & Agronomic Engine
+        </div>
+        <h1>🌱 AI Fertilizer Vision & Advisory</h1>
+        <p>End-to-end identification & advisory for Chemical Fertilizers (Solid, Liquid, Water-soluble) and Biofertilizers (Liquid, Carrier-based).</p>
+    </header>
+
+    <!-- Top Module Navigation -->
+    <nav class="module-nav" data-aos="fade-up">
+        <button class="nav-btn active" onclick="switchTab('scanTab', this)">
+            <i class="fas fa-camera"></i> 📷 Scan Fertilizer
+        </button>
+        <button class="nav-btn" onclick="switchTab('chemTab', this); loadCatalog('Chemical Fertilizer')">
+            <i class="fas fa-flask"></i> 🧪 Chemical Fertilizers
+        </button>
+        <button class="nav-btn" onclick="switchTab('bioTab', this); loadCatalog('Biofertilizer')">
+            <i class="fas fa-microbe"></i> 🦠 Biofertilizers
+        </button>
+        <button class="nav-btn" onclick="switchTab('historyTab', this); renderHistoryView()">
+            <i class="fas fa-history"></i> 📜 Scan History (<span id="historyCount">0</span>)
+        </button>
+    </nav>
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: 📷 SCAN FERTILIZER -->
+    <!-- ======================================================== -->
+    <div id="scanTab" class="tab-view active">
+        <div class="main-grid">
+            <!-- Left Card: Scan & Results -->
+            <div class="card" data-aos="fade-right">
+                <div class="card-header">
+                    <h2><i class="fas fa-camera"></i> Scan & Identify Fertilizer</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fas fa-wand-magic-sparkles"></i> Multimodal AI</span>
+                </div>
+
+                <!-- Capture Options -->
+                <div class="capture-options">
+                    <button type="button" class="btn-capture-mode" id="btnModeLiveCam" onclick="openLiveCamera()">
+                        <i class="fas fa-camera"></i> Live Camera
+                    </button>
+                    <button type="button" class="btn-capture-mode" id="btnModeUpload" onclick="triggerFilePicker()">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload / Drop
+                    </button>
+                </div>
+
+                <!-- Dropzone Area -->
+                <div class="upload-dropzone" id="dropZone" onclick="triggerFilePicker()">
+                    <div class="dropzone-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="dropzone-title">Drop Fertilizer Image Here</div>
+                    <div class="dropzone-subtitle">Bag, bottle, granules, liquid, or biofertilizer packet (JPG, PNG, WEBP)</div>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <input type="file" id="nativeCameraInput" accept="image/*" capture="environment">
+                </div>
+
+                <!-- Image Preview -->
+                <div class="preview-container" id="previewContainer">
+                    <span class="preview-overlay-tag" id="previewTag">Selected Image</span>
+                    <img id="imagePreview" class="preview-image" alt="Fertilizer preview">
+                </div>
+
+                <!-- Error Notification -->
+                <div class="alert-bar alert-error" id="errorBar">
+                    <i class="fas fa-exclamation-triangle" style="margin-top: 2px;"></i>
+                    <div id="errorText">Error message</div>
+                </div>
+
+                <!-- Actions -->
+                <div class="btn-group">
+                    <button class="btn-primary" id="analyzeBtn" onclick="analyzeFertilizer()">
+                        <i class="fas fa-magnifying-glass-chart"></i> Identify & Advise
+                    </button>
+                    <button class="btn-secondary" onclick="resetAll()">
+                        <i class="fas fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+
+                <!-- Detailed Analysis & Advisory Output -->
+                <div class="results-panel" id="resultsPanel">
+                    <!-- Result Badge Header -->
+                    <div class="result-badge-header">
+                        <div class="result-title-area">
+                            <div class="type-tags-row">
+                                <span class="badge-type badge-chemical" id="resPrimaryType">Chemical Fertilizer</span>
+                                <span class="badge-type badge-subtype" id="resSubType">Solid</span>
+                                <span class="badge-type" style="background: rgba(255,255,255,0.2); color:white;" id="resCategory">Nitrogenous</span>
+                            </div>
+                            <h3 id="resName">Urea (Neem Coated)</h3>
+                            <p id="resTradeName" style="opacity: 0.9; font-size: 0.95rem;">Commercial Formulation</p>
+                        </div>
+                        <div class="confidence-pill">
+                            <span class="confidence-label">AI Confidence</span>
+                            <span id="resConfidence">96.5%</span>
+                        </div>
+                    </div>
+
+                    <!-- 🔬 Fertilizer Analysis Section -->
+                    <div class="analysis-card">
+                        <div class="analysis-title">
+                            <span><i class="fas fa-microscope"></i> 🔬 Fertilizer Analysis</span>
+                            <span id="resNpkRatio" style="font-weight: 800; color: var(--primary);">46-0-0</span>
+                        </div>
+
+                        <!-- Chemical NPK Gauge Bars (Shown if Chemical) -->
+                        <div id="npkMetersWrapper">
+                            <div class="npk-meters">
+                                <div class="npk-meter-box nitrogen">
+                                    <div class="npk-element">
+                                        <span class="element-symbol" style="color: #0284c7;">N (Nitrogen)</span>
+                                        <span class="element-percent" id="valNitrogen">46%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="barNitrogen" style="width: 46%;"></div>
+                                    </div>
+                                </div>
+                                <div class="npk-meter-box phosphorus">
+                                    <div class="npk-element">
+                                        <span class="element-symbol" style="color: #e11d48;">P (Phosphorus)</span>
+                                        <span class="element-percent" id="valPhosphorus">0%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="barPhosphorus" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                                <div class="npk-meter-box potassium">
+                                    <div class="npk-element">
+                                        <span class="element-symbol" style="color: #ca8a04;">K (Potassium)</span>
+                                        <span class="element-percent" id="valPotassium">0%</span>
+                                    </div>
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill" id="barPotassium" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Biofertilizer Microbial Cell Card (Shown if Biofertilizer) -->
+                        <div id="bioDetailsWrapper" style="display: none; margin-bottom: 12px;">
+                            <div style="background: #ecfdf5; border: 1.5px solid #a7f3d0; border-radius: 12px; padding: 14px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                    <strong style="color: #065f46;"><i class="fas fa-dna"></i> Active Biological Culture:</strong>
+                                    <span class="badge-type" style="background:#059669; color:white;">Viable Inoculant</span>
+                                </div>
+                                <div id="resMicrobialSpecies" style="font-style: italic; color: #047857; margin-bottom: 6px;">Live bacterial strain culture</div>
+                                <div style="font-size: 0.85rem; color: #065f46;"><i class="fas fa-check-circle"></i> Minimum Population: <strong>1 × 10⁸ CFU / ml or gm</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Composition & Micronutrients -->
+                        <div class="composition-box">
+                            <p><strong><i class="fas fa-atom"></i> Chemical / Microbial Composition:</strong> <span id="resComposition">Amide Nitrogen 46%</span></p>
+                            <p style="margin-top: 6px;"><strong><i class="fas fa-plus-circle"></i> Micronutrients & Minerals:</strong> <span id="resMicronutrients">None</span></p>
+                            <p style="margin-top: 6px;"><strong><i class="fas fa-palette"></i> Physical Appearance:</strong> <span id="resPhysicalForm">Solid prilled granules</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Advisory Grid -->
+                    <div class="advisory-grid">
+                        <!-- ❓ Why Used -->
+                        <div class="advisory-box">
+                            <div class="advisory-box-header">
+                                <i class="fas fa-bullseye"></i> Why Is It Used? (Purpose & Benefits)
+                            </div>
+                            <div class="advisory-box-content" id="resWhyUsed">
+                                Supplies essential crop nutrition to accelerate growth.
+                            </div>
+                        </div>
+
+                        <!-- 🌾 Crop Compatibility -->
+                        <div class="advisory-box">
+                            <div class="advisory-box-header">
+                                <i class="fas fa-wheat-awn"></i> 🌾 Crop Compatibility
+                            </div>
+                            <div class="advisory-box-content">
+                                <p style="margin-bottom: 8px;"><strong>Suitable Field & Horticultural Crops:</strong></p>
+                                <div id="resCropCompatibilityChips" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+                            </div>
+                        </div>
+
+                        <!-- 💧 Application Guidance -->
+                        <div class="advisory-box">
+                            <div class="advisory-box-header">
+                                <i class="fas fa-droplet"></i> 💧 Application Guidance & Dosage
+                            </div>
+                            <div class="advisory-box-content">
+                                <div id="resAppMethodsList" style="margin-bottom: 8px;"></div>
+                                <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 10px 14px; margin-top: 10px;">
+                                    <strong><i class="fas fa-scale-balanced"></i> Recommended Dose:</strong> <span id="resDosageGuideline">45-50 kg/acre</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ⚠️ Precautions -->
+                        <div class="advisory-box precautions-box">
+                            <div class="advisory-box-header">
+                                <i class="fas fa-triangle-exclamation"></i> ⚠️ Precautions & Safety Warnings
+                            </div>
+                            <div class="advisory-box-content">
+                                <ul id="resPrecautionsList">
+                                    <li>Avoid direct mixing with incompatible agrochemicals.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 📦 Storage Information -->
+                        <div class="advisory-box storage-box">
+                            <div class="advisory-box-header">
+                                <i class="fas fa-box-archive"></i> 📦 Storage Information
+                            </div>
+                            <div class="advisory-box-content" id="resStorageInfo">
+                                Store in cool, moisture-proof, dry warehouse.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Card: Agricultural Assistant Chat -->
+            <div class="card chat-card" data-aos="fade-left">
+                <div class="card-header">
+                    <h2><i class="fas fa-comments"></i> Agri-Expert Advisor</h2>
+                    <span class="badge-pill" style="margin: 0; background: #dcfce7; color: #166534;"><i class="fas fa-circle" style="font-size: 0.6rem; color: #22c55e;"></i> Online</span>
+                </div>
+
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-empty" id="chatEmpty">
+                        <i class="fas fa-seedling"></i>
+                        <p><strong>Ask any Chemical or Biofertilizer Question</strong></p>
+                        <p style="font-size: 0.85rem;">E.g., "How to treat seeds with Rhizobium?", "Can I tank-mix with fungicide?", "Best time to apply Nano Urea?"</p>
+                    </div>
+                </div>
+
+                <!-- Quick Inquiry Chips -->
+                <div class="chat-chips">
+                    <button type="button" class="chip" onclick="askQuickQuestion('What is the exact dose per acre for field crops?')">💡 Dose per acre</button>
+                    <button type="button" class="chip" onclick="askQuickQuestion('Can I mix this fertilizer with chemical pesticides or fungicides?')">🧪 Tank mixing rules</button>
+                    <button type="button" class="chip" onclick="askQuickQuestion('How does this fertilizer affect soil health and microbes?')">🌱 Soil health</button>
+                    <button type="button" class="chip" onclick="askQuickQuestion('What is the step-by-step seed treatment method?')">🌾 Seed treatment guide</button>
+                </div>
+
+                <!-- Chat Input Row -->
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Type your farming question..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+                    <button class="btn-send" id="chatSendBtn" onclick="sendChatMessage()" title="Send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: 🧪 CHEMICAL FERTILIZERS EXPLORER -->
+    <!-- ======================================================== -->
+    <div id="chemTab" class="tab-view">
+        <div class="card" data-aos="fade-up">
+            <div class="explorer-header">
+                <div>
+                    <h2><i class="fas fa-flask" style="color: var(--accent-chem);"></i> 🧪 Chemical Fertilizers</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Explore primary synthetic fertilizers categorized by physical formulation.</p>
+                </div>
+                <div class="sub-filters">
+                    <button class="sub-filter-btn active" onclick="filterCatalog('Chemical Fertilizer', 'all', this)">All</button>
+                    <button class="sub-filter-btn" onclick="filterCatalog('Chemical Fertilizer', 'Solid', this)">Solid (Granular/Prilled)</button>
+                    <button class="sub-filter-btn" onclick="filterCatalog('Chemical Fertilizer', 'Liquid', this)">Liquid (Nano Solutions)</button>
+                    <button class="sub-filter-btn" onclick="filterCatalog('Chemical Fertilizer', 'Water-soluble', this)">Water-soluble (100% Foliar/Drip)</button>
+                </div>
+            </div>
+            <div class="catalog-grid" id="chemCatalogGrid">
+                <!-- Populated dynamically from API -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: 🦠 BIOFERTILIZERS EXPLORER -->
+    <!-- ======================================================== -->
+    <div id="bioTab" class="tab-view">
+        <div class="card" data-aos="fade-up">
+            <div class="explorer-header">
+                <div>
+                    <h2><i class="fas fa-microbe" style="color: var(--accent-bio);"></i> 🦠 Biofertilizers & Microbial Inoculants</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Explore living microbial inoculants for sustainable biological nitrogen fixation and phosphate solubilization.</p>
+                </div>
+                <div class="sub-filters">
+                    <button class="sub-filter-btn active" onclick="filterCatalog('Biofertilizer', 'all', this)">All</button>
+                    <button class="sub-filter-btn" onclick="filterCatalog('Biofertilizer', 'Liquid', this)">Liquid Biofertilizers</button>
+                    <button class="sub-filter-btn" onclick="filterCatalog('Biofertilizer', 'Carrier-based', this)">Carrier-based (Lignite/Peat/VAM)</button>
+                </div>
+            </div>
+            <div class="catalog-grid" id="bioCatalogGrid">
+                <!-- Populated dynamically from API -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: 📜 SCAN HISTORY -->
+    <!-- ======================================================== -->
+    <div id="historyTab" class="tab-view">
+        <div class="card" data-aos="fade-up">
+            <div class="explorer-header">
+                <div>
+                    <h2><i class="fas fa-history"></i> 📜 Scanned Fertilizer History</h2>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Stored locally on your device for quick re-inspection and offline reference.</p>
+                </div>
+                <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="clearAllHistory()">
+                    <i class="fas fa-trash"></i> Clear History
+                </button>
+            </div>
+            <div class="history-grid" id="historyGrid">
+                <!-- Populated from localStorage -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Live Camera Modal -->
+<div class="camera-modal" id="cameraModal">
+    <div class="camera-box">
+        <div class="camera-header">
+            <h3><i class="fas fa-camera"></i> Live Fertilizer Scanner</h3>
+            <button class="btn-icon-close" onclick="closeLiveCamera()">&times;</button>
+        </div>
+        <div class="video-viewport">
+            <video id="cameraVideo" autoplay playsinline muted></video>
+            <div class="camera-guide-box">
+                <div class="guide-text">Align fertilizer bag, granules, or liquid bottle</div>
+                <div class="guide-text" style="font-size: 0.72rem; opacity: 0.8;">Ensure good lighting & clear packaging text</div>
+            </div>
+        </div>
+        <div class="camera-controls">
+            <button class="btn-cam-action" onclick="switchCameraFacing()" title="Switch Camera">
+                <i class="fas fa-camera-rotate"></i>
+            </button>
+            <button class="btn-cam-snap" onclick="captureSnapshot()" title="Capture Snapshot">
+                <i class="fas fa-camera"></i>
+            </button>
+            <button class="btn-cam-action" onclick="fallbackNativeCamera()" title="Use System Camera App">
+                <i class="fas fa-mobile-screen"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<canvas id="snapshotCanvas" style="display: none;"></canvas>
+
+<!-- AOS Animation Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+    AOS.init({ duration: 700, once: true });
+
+    // Automatically update service worker and purge old caches
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.getRegistrations().then(regs => {
+                for (let reg of regs) reg.update();
+            });
+            navigator.serviceWorker.register('./sw.js?v=3').catch(e => console.log('SW register failed:', e));
+        });
+    }
+    if ('caches' in window) {
+        caches.keys().then(names => {
+            for (let name of names) {
+                if (name !== 'fertilizer-ai-v3') caches.delete(name);
+            }
+        });
+    }
+
+    // API Configuration
+    const API_BASE_URL = document.querySelector('meta[name="fertilizer-api-url"]')?.content.replace(/\/$/, "") || window.location.origin;
+
+    // State Variables
+    let currentSelectedFile = null;
+    let currentPreviewDataUrl = "";
+    let isAnalyzing = false;
+    let isChatting = false;
+    let cameraStream = null;
+    let currentFacingMode = "environment";
+    let activeFertilizerContext = "";
+    let activeFertilizerName = "";
+
+    // DOM Elements
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const nativeCameraInput = document.getElementById('nativeCameraInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const errorBar = document.getElementById('errorBar');
+    const errorText = document.getElementById('errorText');
+    const resultsPanel = document.getElementById('resultsPanel');
+    const cameraModal = document.getElementById('cameraModal');
+    const cameraVideo = document.getElementById('cameraVideo');
+    const snapshotCanvas = document.getElementById('snapshotCanvas');
+
+    // ========================================
+    // 🗂️ TAB SWITCHING
+    // ========================================
+    function switchTab(tabId, element) {
+        document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        
+        const activeTab = document.getElementById(tabId);
+        if (activeTab) activeTab.classList.add('active');
+        if (element) element.classList.add('active');
+    }
+
+    // Drag and Drop Listeners
+    ['dragenter', 'dragover'].forEach(name => {
+        dropZone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add('dragover');
+        });
+    });
+
+    ['dragleave', 'drop'].forEach(name => {
+        dropZone.addEventListener(name, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('dragover');
+        });
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+            handleSelectedFile(files[0]);
+        }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            handleSelectedFile(e.target.files[0]);
+        }
+    });
+
+    nativeCameraInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            handleSelectedFile(e.target.files[0]);
+        }
+    });
+
+    function triggerFilePicker() {
+        fileInput.click();
+    }
+
+    function handleSelectedFile(file) {
+        if (!file || !file.type.startsWith('image/')) {
+            showError("Please select a valid image file (JPG, PNG, WEBP).");
+            return;
+        }
+        hideError();
+        currentSelectedFile = file;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            currentPreviewDataUrl = event.target.result;
+            imagePreview.src = currentPreviewDataUrl;
+            previewContainer.classList.add('show');
+            document.getElementById('previewTag').textContent = file.name || "Selected Image";
+            resultsPanel.classList.remove('show');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // ========================================
+    // 📷 ROBUST LIVE CAMERA ENGINE
+    // ========================================
+    async function openLiveCamera() {
+        hideError();
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            console.warn("getUserMedia not supported or insecure context. Triggering native camera fallback.");
+            fallbackNativeCamera();
+            return;
+        }
+
+        cameraModal.classList.add('show');
+        await startCameraStream();
+    }
+
+    async function startCameraStream() {
+        if (cameraStream) stopCameraStream();
+
+        const constraintsList = [
+            { video: { facingMode: { exact: currentFacingMode }, width: { ideal: 1280 }, height: { ideal: 720 } } },
+            { video: { facingMode: currentFacingMode, width: { ideal: 1280 } } },
+            { video: true }
+        ];
+
+        let streamStarted = false;
+        let lastError = null;
+
+        for (const constraints of constraintsList) {
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                cameraVideo.srcObject = cameraStream;
+                await cameraVideo.play();
+                streamStarted = true;
+                break;
+            } catch (err) {
+                lastError = err;
+            }
+        }
+
+        if (!streamStarted) {
+            closeLiveCamera();
+            handleCameraError(lastError);
+        }
+    }
+
+    function switchCameraFacing() {
+        currentFacingMode = (currentFacingMode === "environment") ? "user" : "environment";
+        startCameraStream();
+    }
+
+    function captureSnapshot() {
+        if (!cameraVideo || !cameraStream) return;
+
+        const width = cameraVideo.videoWidth || 1280;
+        const height = cameraVideo.videoHeight || 720;
+        snapshotCanvas.width = width;
+        snapshotCanvas.height = height;
+
+        const ctx = snapshotCanvas.getContext('2d');
+        ctx.drawImage(cameraVideo, 0, 0, width, height);
+
+        snapshotCanvas.toBlob((blob) => {
+            if (!blob) {
+                showError("Could not capture image snapshot. Please try again.");
+                return;
+            }
+            const file = new File([blob], `fertilizer_capture_${Date.now()}.jpg`, { type: 'image/jpeg' });
+            handleSelectedFile(file);
+            closeLiveCamera();
+        }, 'image/jpeg', 0.92);
+    }
+
+    function stopCameraStream() {
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+            cameraStream = null;
+        }
+        if (cameraVideo) cameraVideo.srcObject = null;
+    }
+
+    function closeLiveCamera() {
+        stopCameraStream();
+        cameraModal.classList.remove('show');
+    }
+
+    function fallbackNativeCamera() {
+        closeLiveCamera();
+        nativeCameraInput.click();
+    }
+
+    function handleCameraError(error) {
+        console.error("Camera error:", error);
+        if (!error) return;
+        if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+            showError("Camera access denied. Please allow camera permissions in your browser address bar.");
+        } else if (error.name === 'NotFoundError') {
+            showError("No camera hardware detected. Please use the file upload option.");
+        } else {
+            showError("Could not start camera. Please use the file upload option.");
+        }
+    }
+
+    // ========================================
+    // 🤖 AI IDENTIFICATION & ADVISORY
+    // ========================================
+    async function analyzeFertilizer() {
+        if (!currentSelectedFile) {
+            showError("Please capture or upload a fertilizer image first.");
+            return;
+        }
+
+        if (isAnalyzing) return;
+        isAnalyzing = true;
+        hideError();
+
+        const origBtnText = analyzeBtn.innerHTML;
+        analyzeBtn.innerHTML = '<span class="spinner"></span> Analyzing Fertilizer...';
+        analyzeBtn.disabled = true;
+
+        try {
+            const formData = new FormData();
+            formData.append('image', currentSelectedFile);
+
+            const response = await fetch(`${API_BASE_URL}/api/identify`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.detail || `Server returned error (${response.status})`);
+            }
+
+            const payload = await response.json();
+            const data = payload.data;
+
+            if (!data.identified) {
+                showError("The AI could not clearly detect a fertilizer or plant nutrient in this image: " + (data.why_used || "Please upload a clearer image."));
+                return;
+            }
+
+            // Render structured results
+            renderResults(data);
+            resultsPanel.classList.add('show');
+            resultsPanel.scrollIntoView({ behavior: 'smooth' });
+
+            // Save to localStorage Scan History
+            saveScanToHistory(data, currentPreviewDataUrl);
+
+            // Update chat context
+            activeFertilizerName = data.fertilizer_name;
+            activeFertilizerContext = JSON.stringify({
+                name: data.fertilizer_name,
+                primary_type: data.primary_type,
+                sub_type: data.sub_type,
+                category: data.category,
+                npk: data.npk_ratio,
+                composition: data.composition,
+                dosage: data.application_guidance?.dosage,
+                precautions: data.precautions
+            }, null, 2);
+
+            appendChatMessage('bot', `I have identified this as **${data.fertilizer_name}** (${data.primary_type} • ${data.sub_type || 'Standard'}). Ask me anything about dosage, dilution, or mixing!`);
+
+        } catch (err) {
+            console.error("Analysis failure:", err);
+            showError(err.message || "Failed to analyze fertilizer. Check backend connection.");
+        } finally {
+            analyzeBtn.innerHTML = origBtnText;
+            analyzeBtn.disabled = false;
+            isAnalyzing = false;
+        }
+    }
+
+    function renderResults(data) {
+        document.getElementById('resName').textContent = data.fertilizer_name || "Fertilizer Identified";
+        document.getElementById('resTradeName').textContent = data.commercial_trade_name || (data.physical_form || "Commercial Formulation");
+        document.getElementById('resConfidence').textContent = (data.confidence ? data.confidence.toFixed(1) : "95.0") + "%";
+
+        // Badges: Primary Type & Subtype
+        const primaryEl = document.getElementById('resPrimaryType');
+        const isBio = (data.primary_type || "").toLowerCase().includes("bio");
+        primaryEl.textContent = data.primary_type || (isBio ? "Biofertilizer" : "Chemical Fertilizer");
+        primaryEl.className = `badge-type ${isBio ? 'badge-bio' : 'badge-chemical'}`;
+
+        document.getElementById('resSubType').textContent = data.sub_type || "Formulation";
+        document.getElementById('resCategory').textContent = data.category || "Agricultural Nutrient";
+
+        // NPK vs Biofertilizer Microbial Switch
+        const npkWrapper = document.getElementById('npkMetersWrapper');
+        const bioWrapper = document.getElementById('bioDetailsWrapper');
+
+        if (isBio) {
+            npkWrapper.style.display = 'none';
+            bioWrapper.style.display = 'block';
+            document.getElementById('resMicrobialSpecies').textContent = data.composition || "Active beneficial microbial culture (min 1x10⁸ CFU)";
+            document.getElementById('resNpkRatio').textContent = data.npk_ratio || "Biological Nutrition";
+        } else {
+            npkWrapper.style.display = 'block';
+            bioWrapper.style.display = 'none';
+
+            const npk = data.npk_ratio || `${data.nitrogen_percent || 0}-${data.phosphorus_percent || 0}-${data.potassium_percent || 0}`;
+            document.getElementById('resNpkRatio').textContent = npk;
+
+            const nVal = Math.min(100, Math.max(0, parseFloat(data.nitrogen_percent) || 0));
+            const pVal = Math.min(100, Math.max(0, parseFloat(data.phosphorus_percent) || 0));
+            const kVal = Math.min(100, Math.max(0, parseFloat(data.potassium_percent) || 0));
+
+            document.getElementById('valNitrogen').textContent = nVal + "%";
+            document.getElementById('valPhosphorus').textContent = pVal + "%";
+            document.getElementById('valPotassium').textContent = kVal + "%";
+
+            document.getElementById('barNitrogen').style.width = nVal + "%";
+            document.getElementById('barPhosphorus').style.width = pVal + "%";
+            document.getElementById('barPotassium').style.width = kVal + "%";
+        }
+
+        // Composition & Micronutrients
+        document.getElementById('resComposition').textContent = data.composition || "Standard agricultural nutrient formulation.";
+        document.getElementById('resMicronutrients').textContent = data.micronutrients || "None specified";
+        document.getElementById('resPhysicalForm').textContent = `${data.physical_form || 'Formulation'} (${data.color_and_texture || 'Visible formulation'})`;
+
+        // Why Used
+        document.getElementById('resWhyUsed').textContent = data.why_used || "Provides essential crop nutrition.";
+
+        // Crop Compatibility Chips
+        const chipsContainer = document.getElementById('resCropCompatibilityChips');
+        chipsContainer.innerHTML = "";
+        const crops = Array.isArray(data.crop_compatibility) ? data.crop_compatibility : ["Rice", "Wheat", "Maize", "Pulses", "Vegetables"];
+        crops.forEach(crop => {
+            const span = document.createElement('span');
+            span.style.background = '#e0f2fe';
+            span.style.color = '#0369a1';
+            span.style.padding = '4px 12px';
+            span.style.borderRadius = '9999px';
+            span.style.fontSize = '0.85rem';
+            span.style.fontWeight = '600';
+            span.textContent = crop;
+            chipsContainer.appendChild(span);
+        });
+
+        // Application Guidance & Dosage
+        const appMethodsContainer = document.getElementById('resAppMethodsList');
+        appMethodsContainer.innerHTML = "";
+        const methods = data.application_guidance?.methods || [];
+        if (Array.isArray(methods)) {
+            methods.forEach(m => {
+                const p = document.createElement('p');
+                p.style.marginBottom = "6px";
+                p.innerHTML = `<strong>• ${m.method}:</strong> ${m.detail}`;
+                appMethodsContainer.appendChild(p);
+            });
+        }
+        document.getElementById('resDosageGuideline').textContent = data.application_guidance?.dosage || "Follow product label for recommended dosage.";
+
+        // Precautions
+        const precList = document.getElementById('resPrecautionsList');
+        precList.innerHTML = "";
+        const precs = Array.isArray(data.precautions) ? data.precautions : [data.precautions || "Follow label instructions."];
+        precs.forEach(p => {
+            const li = document.createElement('li');
+            li.textContent = p;
+            precList.appendChild(li);
+        });
+
+        // Storage
+        document.getElementById('resStorageInfo').textContent = data.storage_info || "Store in airtight, dry packaging.";
+    }
+
+    // ========================================
+    // 📚 CATALOG EXPLORER (CHEMICAL & BIO)
+    // ========================================
+    let fullCatalog = [];
+
+    async function loadCatalog(category) {
+        const gridId = (category === 'Biofertilizer') ? 'bioCatalogGrid' : 'chemCatalogGrid';
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:30px;"><span class="spinner" style="border-top-color: var(--primary);"></span> Loading catalog...</div>';
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/fertilizers?category=${encodeURIComponent(category)}`);
+            const json = await response.json();
+            fullCatalog = json.data || [];
+            renderCatalogCards(fullCatalog, gridId);
+        } catch (e) {
+            grid.innerHTML = '<div style="color: #b91c1c; padding:20px;">Could not load catalog from server.</div>';
+        }
+    }
+
+    function filterCatalog(category, subType, buttonElement) {
+        // Toggle button active styling
+        const parent = buttonElement.parentElement;
+        parent.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
+        buttonElement.classList.add('active');
+
+        const gridId = (category === 'Biofertilizer') ? 'bioCatalogGrid' : 'chemCatalogGrid';
+        let filtered = fullCatalog;
+        if (subType !== 'all') {
+            filtered = fullCatalog.filter(item => (item.sub_type || "").toLowerCase() === subType.toLowerCase());
+        }
+        renderCatalogCards(filtered, gridId);
+    }
+
+    function renderCatalogCards(items, gridId) {
+        const grid = document.getElementById(gridId);
+        grid.innerHTML = "";
+
+        if (!items || items.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">No fertilizers found under this filter.</div>';
+            return;
+        }
+
+        items.forEach(item => {
+            const isBio = (item.primary_type || "").toLowerCase().includes("bio");
+            const card = document.createElement('div');
+            card.className = 'catalog-card';
+            card.innerHTML = `
+                <div>
+                    <div class="catalog-badge-row">
+                        <span class="badge-type ${isBio ? 'badge-bio' : 'badge-chemical'}">${item.sub_type}</span>
+                        <span style="font-size: 0.82rem; font-weight: 800; color: var(--primary);">${item.npk}</span>
+                    </div>
+                    <div class="catalog-title">${item.name}</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px;">${item.category}</div>
+                    <div class="catalog-desc">${item.benefits}</div>
+                </div>
+                <div>
+                    <button class="btn-inspect" onclick="inspectCatalogItem('${item.id}')">
+                        <i class="fas fa-eye"></i> View Full Advisory
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function inspectCatalogItem(itemId) {
+        const item = fullCatalog.find(i => i.id === itemId);
+        if (!item) return;
+
+        // Populate as active scan result and switch to Scan Tab
+        const formattedData = {
+            identified: true,
+            fertilizer_name: item.name,
+            commercial_trade_name: item.name,
+            primary_type: item.primary_type,
+            sub_type: item.sub_type,
+            category: item.category,
+            npk_ratio: item.npk,
+            nitrogen_percent: item.nitrogen || 0,
+            phosphorus_percent: item.phosphorus || 0,
+            potassium_percent: item.potassium || 0,
+            micronutrients: item.micronutrients || "None specified",
+            composition: item.composition || "Standard agricultural grade formulation",
+            confidence: 99.0,
+            physical_form: item.sub_type,
+            color_and_texture: item.color || "Standard formulation",
+            why_used: item.benefits,
+            crop_compatibility: item.crop_compatibility || ["Rice", "Wheat", "Maize", "Pulses"],
+            application_guidance: {
+                methods: [{ method: "Standard Application", detail: item.application }],
+                dosage: "Follow local agro-climatic packaging guidelines."
+            },
+            precautions: [item.precautions],
+            storage_info: item.storage || "Store in airtight, dry packaging."
+        };
+
+        // Switch to Scan Tab and show
+        switchTab('scanTab', document.querySelector('.module-nav .nav-btn'));
+        renderResults(formattedData);
+        resultsPanel.classList.add('show');
+        resultsPanel.scrollIntoView({ behavior: 'smooth' });
+
+        activeFertilizerName = item.name;
+        activeFertilizerContext = JSON.stringify(formattedData, null, 2);
+        appendChatMessage('bot', `Viewing advisory for **${item.name}** (${item.primary_type} • ${item.sub_type}). What questions do you have regarding its application?`);
+    }
+
+    // ========================================
+    // 📜 SCAN HISTORY (LOCAL STORAGE)
+    // ========================================
+    const STORAGE_KEY = 'krishi_fertilizer_history_v2';
+
+    function getScanHistory() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        } catch {
+            return [];
+        }
+    }
+
+    function saveScanToHistory(data, thumbnail) {
+        try {
+            let history = getScanHistory();
+            const record = {
+                id: 'scan_' + Date.now(),
+                timestamp: Date.now(),
+                name: data.fertilizer_name,
+                primary_type: data.primary_type,
+                sub_type: data.sub_type,
+                npk: data.npk_ratio,
+                confidence: data.confidence,
+                thumbnail: thumbnail || "",
+                full_data: data
+            };
+            history.unshift(record);
+            if (history.length > 30) history.pop(); // Keep last 30 scans
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+            updateHistoryCounter();
+        } catch (e) {
+            console.warn("Could not save to localStorage:", e);
+        }
+    }
+
+    function updateHistoryCounter() {
+        const countEl = document.getElementById('historyCount');
+        if (countEl) countEl.textContent = getScanHistory().length;
+    }
+
+    function renderHistoryView() {
+        const history = getScanHistory();
+        const grid = document.getElementById('historyGrid');
+        grid.innerHTML = "";
+
+        if (history.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding: 40px; color: var(--text-muted);"><i class="fas fa-history" style="font-size: 2.5rem; margin-bottom: 12px; color: #cbd5e1; display:block;"></i>No previous fertilizer scans yet. Capture or upload a fertilizer image to see your history here.</div>';
+            return;
+        }
+
+        history.forEach(item => {
+            const isBio = (item.primary_type || "").toLowerCase().includes("bio");
+            const dateStr = new Date(item.timestamp).toLocaleString();
+            const card = document.createElement('div');
+            card.className = 'history-card';
+            card.innerHTML = `
+                <div class="history-thumb-box">
+                    ${item.thumbnail ? `<img src="${item.thumbnail}" class="history-thumb" alt="${item.name}">` : `<div style="height:100%; display:flex; align-items:center; justify-content:center; color:#94a3b8;"><i class="fas fa-image" style="font-size:2rem;"></i></div>`}
+                </div>
+                <div class="history-body">
+                    <div>
+                        <div class="history-time"><i class="fas fa-clock"></i> ${dateStr}</div>
+                        <div class="catalog-badge-row">
+                            <span class="badge-type ${isBio ? 'badge-bio' : 'badge-chemical'}">${item.primary_type}</span>
+                            <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">${item.npk || ''}</span>
+                        </div>
+                        <div class="catalog-title" style="margin-top: 4px;">${item.name}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Confidence: ${(item.confidence || 95).toFixed(1)}%</div>
+                    </div>
+                    <button class="btn-inspect" onclick="reloadHistoryScan('${item.id}')">
+                        <i class="fas fa-folder-open"></i> Load Advisory
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function reloadHistoryScan(scanId) {
+        const history = getScanHistory();
+        const item = history.find(h => h.id === scanId);
+        if (!item || !item.full_data) return;
+
+        switchTab('scanTab', document.querySelector('.module-nav .nav-btn'));
+        renderResults(item.full_data);
+        resultsPanel.classList.add('show');
+        resultsPanel.scrollIntoView({ behavior: 'smooth' });
+
+        if (item.thumbnail) {
+            imagePreview.src = item.thumbnail;
+            previewContainer.classList.add('show');
+        }
+
+        activeFertilizerName = item.name;
+        activeFertilizerContext = JSON.stringify(item.full_data, null, 2);
+    }
+
+    function clearAllHistory() {
+        if (confirm("Are you sure you want to clear your fertilizer scan history?")) {
+            localStorage.removeItem(STORAGE_KEY);
+            updateHistoryCounter();
+            renderHistoryView();
+        }
+    }
+
+    // ========================================
+    // 💬 AGRI-EXPERT CHATBOT
+    // ========================================
+    async function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if (!text || isChatting) return;
+
+        input.value = "";
+        appendChatMessage('user', text);
+
+        isChatting = true;
+        const sendBtn = document.getElementById('chatSendBtn');
+        sendBtn.disabled = true;
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: text,
+                    fertilizer_context: activeFertilizerContext
+                })
+            });
+
+            if (!response.ok) throw new Error("Chat service unavailable.");
+            const data = await response.json();
+            appendChatMessage('bot', data.reply);
+        } catch (err) {
+            appendChatMessage('bot', "I apologize, but I could not reach the agricultural advisory service. Please check your network connection.");
+        } finally {
+            sendBtn.disabled = false;
+            isChatting = false;
+        }
+    }
+
+    function askQuickQuestion(questionText) {
+        document.getElementById('chatInput').value = questionText;
+        sendChatMessage();
+    }
+
+    function appendChatMessage(sender, messageText) {
+        const chatBody = document.getElementById('chatBody');
+        const emptyState = document.getElementById('chatEmpty');
+        if (emptyState) emptyState.style.display = 'none';
+
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-msg ${sender}`;
+
+        let formatted = messageText
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\n\s*•/g, '<br>•')
+            .replace(/\n/g, '<br>');
+
+        msgDiv.innerHTML = formatted;
+        chatBody.appendChild(msgDiv);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // UI Helpers
+    function showError(msg) {
+        errorText.textContent = msg;
+        errorBar.classList.add('show');
+    }
+
+    function hideError() {
+        errorBar.classList.remove('show');
+    }
+
+    function resetAll() {
+        currentSelectedFile = null;
+        currentPreviewDataUrl = "";
+        fileInput.value = "";
+        nativeCameraInput.value = "";
+        previewContainer.classList.remove('show');
+        resultsPanel.classList.remove('show');
+        hideError();
+        activeFertilizerContext = "";
+        activeFertilizerName = "";
+        stopCameraStream();
+    }
+
+    // Initial counter setup
+    updateHistoryCounter();
+</script>
+
+</body>
+</html>
